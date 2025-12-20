@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Al Ayash Al Hila Menu</title>
+
+  <!-- Mobile-first base styles -->
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: #f7f6f3; /* off-white */
+      color: #111;
+    }
+
+    /* Top bar */
+    .top-bar {
+      background-color: #0b1c2d; /* dark blue */
+      padding: 0.75rem 1rem;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      height: 42px;
+    }
+
+    .menu-btn {
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Category hero image */
+    .category-hero img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Category Tabs */
+    .tabs {
+      display: flex;
+      overflow-x: auto;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .tab {
+      padding: 0.75rem 1rem;
+      white-space: nowrap;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .tab.active {
+      border-bottom: 3px solid #f4a300; /* orangy yellow */
+      font-weight: bold;
+    }
+
+    /* Menu grid */
+    .menu {
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    /* Item Card */
+    .card {
+      background-color: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .card-content {
+      padding: 0.75rem 0.75rem 1rem;
+      text-align: center;
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      margin: 0.4rem 0 0.25rem 0;
+    }
+
+    .card-price {
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      color: #c1121f;
+    }
+
+    .add-btn {
+      width: 100%;
+      padding: 0.6rem;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #c1121f;
+      color: #fff;
+      cursor: pointer;
+    }
+  
+    /* Footer */
+    .footer {
+      background-color: #f4a300; /* orangy yellow */
+      padding: 1.5rem 1rem 2rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      height: 48px;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .footer-link {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #0b1c2d;
+      font-size: 0.95rem;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-link .icon {
+      width: 22px;
+      height: 22px;
+      display: inline-block;
+    }
+    /* Footer link base animation */
+.footer-link {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.footer-link:active {
+  transform: scale(0.96);
+  opacity: 0.85;
+}
+
+/* Footer link base color */
+.footer-link {
+  color: #0b1c2d; /* dark blue */
+  transition: transform 0.15s ease, opacity 0.15s ease, color 0.15s ease;
+}
+
+.footer-link .icon {
+  color: currentColor;
+}
+
+/* Tap / hover animation */
+.footer-link:active {
+  transform: scale(0.96);
+  opacity: 0.85;
+}
+
+/* WhatsApp hover/tap color */
+.footer-link[aria-label="WhatsApp"]:hover,
+.footer-link[aria-label="WhatsApp"]:active {
+  color: #1da851; /* WhatsApp green */
+}
+
+/* Instagram hover/tap color */
+.footer-link[aria-label="Instagram"]:hover,
+.footer-link[aria-label="Instagram"]:active {
+  color: #c13584; /* Instagram pink */
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Modal box */
+.modal {
+  background: #fff;
+  width: 92%;
+  max-width: 420px;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Close button */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #fff;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+/* Modal image */
+.modal-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+/* Modal content */
+.modal-content {
+  padding: 1rem;
+  text-align: center;
+}
+
+.modal-title {
+  margin: 0.5rem 0 0.25rem;
+  font-size: 1.2rem;
+}
+
+.modal-desc {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0.75rem;
+}
+
+.modal-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #c1121f;
+  margin-bottom: 0.75rem;
+}
+
+/* Quantity selector */
+.quantity-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.quantity-control button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #eee;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.quantity-control span {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.modal-add {
+  margin-top: 0.5rem;
+}
+
+
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+  <div class="logo-area">
+    <!-- Logo placeholder -->
+    <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Alayash%20logo%20pngg.png" alt="شعار العياش" class="logo" />
+    <button class="menu-btn">☰</button>
+  </div>
+</header>
+
+<!-- Category Image -->
+<section class="category-hero">
+  <img src="hhttps://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/All%20category.png" alt="صورة القسم" />
+</section>
+
+  <!-- Category Tabs -->
+  <nav class="tabs">
+    <div class="tab active" data-category="all" data-hero="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/All%20category.png" data-alt="الكل">الكل</div>
+    <div class="tab" data-category="grill" data-hero="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/All%20category.png" data-alt="فروج عالفحم">فروج عالفحم</div>
+    <div class="tab" data-category="sandwich" data-hero="https://via.placeholder.com/800x400?text=سندويش" data-alt="سندويش">سندويش</div>
+    <div class="tab" data-category="diet" data-hero="https://via.placeholder.com/800x400?text=دايت" data-alt="دايت">دايت</div>
+    <div class="tab" data-category="sides" data-hero="https://via.placeholder.com/800x400?text=مقبلات" data-alt="مقبلات">مقبلات</div>
+    <div class="tab" data-category="drinks" data-hero="https://via.placeholder.com/800x400?text=مشروبات" data-alt="مشروبات">مشروبات</div>
+  </nav>
+
+  <!-- Menu Items (example placeholder card) -->
+  <section class="menu">
+
+  <!-- فروج عالفحم -->
+  <div class="card"
+  data-id="grill-1"
+  data-category="grill"
+  data-title="فروج مشوي عالفحم"
+  data-price="16000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="فروج مشوي عالفحم">
+  <div class="card-content">
+    <h3 class="card-title">فروج مشوي عالفحم</h3>
+    <div class="card-price">16,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+<div class="card"
+  data-id="grill-2"
+  data-category="grill"
+  data-title="نصف فروج مشوي عالفحم"
+  data-price="9000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="نصف فروج مشوي عالفحم">
+  <div class="card-content">
+    <h3 class="card-title">نصف فروج مشوي عالفحم</h3>
+    <div class="card-price">9,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+<div class="card"
+  data-id="grill-3"
+  data-category="grill"
+  data-title="فروج مشوي عالفحم مع تمن"
+  data-price="18000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="فروج مشوي عالفحم مع تمن">
+  <div class="card-content">
+    <h3 class="card-title">فروج مشوي عالفحم مع تمن</h3>
+    <div class="card-price">18,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+<div class="card"
+  data-id="grill-4"
+  data-category="grill"
+  data-title="نصف فروج مشوي عالفحم مع تمن"
+  data-price="10000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="نصف فروج مشوي عالفحم مع تمن">
+  <div class="card-content">
+    <h3 class="card-title">نصف فروج مشوي عالفحم مع تمن</h3>
+    <div class="card-price">10,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+
+  <!-- سندويش -->
+  <div class="card"
+     data-id="sandwich-1"
+     data-category="sandwich"
+     data-title="ساندويش دجاج كبير"
+     data-price="6000"
+     data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png"
+       alt="ساندويش دجاج كبير" />
+
+  <div class="card-content">
+    <h3 class="card-title">ساندويش دجاج كبير</h3>
+    <div class="card-price">6,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+
+<div class="card"
+     data-id="sandwich-2"
+     data-category="sandwich"
+     data-title="ساندويش دجاج صغير"
+     data-price="3500"
+     data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png"
+       alt="ساندويش دجاج صغير" />
+
+  <div class="card-content">
+    <h3 class="card-title">ساندويش دجاج صغير</h3>
+    <div class="card-price">3,500 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+
+<div class="card"
+     data-id="sandwich-3"
+     data-category="sandwich"
+     data-title="وجبة ساندويش دجاج كبير"
+     data-price="8000"
+     data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png"
+       alt="وجبة ساندويش دجاج كبير" />
+
+  <div class="card-content">
+    <h3 class="card-title">وجبة ساندويش دجاج كبير</h3>
+    <div class="card-price">8,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <!-- دايت -->
+  <div class="card"
+  data-id="diet-1"
+  data-category="diet"
+  data-title="وجبة دايت"
+  data-price="9000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="وجبة دايت">
+  <div class="card-content">
+    <h3 class="card-title">وجبة دايت</h3>
+    <div class="card-price">9,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+<div class="card"
+  data-id="diet-2"
+  data-category="diet"
+  data-title="ساندويش دايت + بيبسي دايت"
+  data-price="8000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="ساندويش دايت + بيبسي دايت">
+  <div class="card-content">
+    <h3 class="card-title">ساندويش دايت + بيبسي دايت</h3>
+    <div class="card-price">8,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <!-- مقبلات -->
+  <div class="card"
+  data-id="sides-1"
+  data-category="sides"
+  data-title="صحن بطاطا كبير"
+  data-price="4000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="صحن بطاطا كبير" />
+  <div class="card-content">
+    <h3 class="card-title">صحن بطاطا كبير</h3>
+    <div class="card-price">4,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card"
+  data-id="sides-2"
+  data-category="sides"
+  data-title="صحن بطاطا صغير"
+  data-price="2000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="صحن بطاطا صغير" />
+  <div class="card-content">
+    <h3 class="card-title">صحن بطاطا صغير</h3>
+    <div class="card-price">2,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card" 
+  data-id="sides-3"
+  data-category="sides"
+  data-title="فتوش"
+  data-price="50000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="فتوش" />
+  <div class="card-content">
+    <h3 class="card-title">فتوش</h3>
+    <div class="card-price">5,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card" 
+  data-id="sides-4"
+  data-category="sides"
+  data-title="تبولة"
+  data-price="5000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="تبولة" />
+  <div class="card-content"><h3 class="card-title">تبولة</h3>
+    <div class="card-price">4,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card" 
+  data-id="sides-5"
+  data-category="sides"
+  data-title="صحن حمص"
+  data-price="4000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="صحن حمص" />
+  <div class="card-content">
+    <h3 class="card-title">صحن حمص</h3>
+    <div class="card-price">4,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card"
+  data-id="sides-6"
+  data-category="sides"
+  data-title="سلطة سيزر"
+  data-price="5000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="سلطة سيزر" />
+  <div class="card-content">
+    <h3 class="card-title">سلطة سيزر</h3>
+    <div class="card-price">5,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card" 
+  data-id="sides-7"
+  data-category="sides"
+  data-title="متبل باذنجان"
+  data-price="4000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="متبل باذنجان" />
+  <div class="card-content">
+    <h3 class="card-title">متبل باذنجان</h3>
+    <div class="card-price">4,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+
+  <div class="card"
+  data-id="sides-8"
+  data-category="sides"
+  data-title="ورق عنب"
+  data-price="5000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="ورق عنب" />
+  <div class="card-content">
+    <h3 class="card-title">ورق عنب</h3>
+    <div class="card-price">5,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card" 
+  data-id="sides-9"
+  data-category="sides"
+  data-title="جاجيك"
+  data-price="4000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="جاجيك" />
+  <div class="card-content">
+    <h3 class="card-title">جاجيك</h3>
+    <div class="card-price">4,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card" 
+  data-id="sides-10"
+  data-category="sides"
+  data-title="صحن مشكل"
+  data-price="5000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="صحن مشكل" />
+  <div class="card-content">
+    <h3 class="card-title">صحن مشكل</h3>
+    <div class="card-price">5,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card" 
+  data-id="sides-11"
+  data-category="sides"
+  data-title="علبة ثوم"
+  data-price="500"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="علبة ثوم" />
+  <div class="card-content">
+    <h3 class="card-title">علبة ثوم</h3>
+    <div class="card-price">500 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card"
+  data-id="sides-12"
+  data-category="sides"
+  data-title="علبة حر"
+  data-price="1000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="علبة حر" />
+  <div class="card-content">
+    <h3 class="card-title">علبة حر</h3>
+    <div class="card-price">1,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card"
+  data-id="sides-13"
+  data-category="sides"
+  data-title="سرفيس"
+  data-price="2000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="سرفيس" />
+  <div class="card-content">
+    <h3 class="card-title">سرفيس</h3>
+    <div class="card-price">2,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <!-- مشروبات -->
+  <div class="card" 
+  data-id="drinks-1"
+  data-category="drinks"
+  data-title="مشروبات غازية"
+  data-price="500"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="مشروبات غازية" />
+  <div class="card-content">
+    <h3 class="card-title">مشروبات غازية</h3>
+    <div class="card-price">500 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card" 
+  data-id="drinks-2"
+  data-category="drinks"
+  data-title="مياه صغيرة"
+  data-price="500"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="مياه صغيرة" />
+  <div class="card-content">
+    <h3 class="card-title">مياه صغيرة</h3>
+    <div class="card-price">500 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card" 
+  data-id="drinks-3"
+  data-category="drinks"
+  data-title="لبن"
+  data-price="500"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="لبن" />
+  <div class="card-content">
+    <h3 class="card-title">لبن</h3>
+    <div class="card-price">500 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card" 
+  data-id="drinks-4"
+  data-category="drinks"
+  data-title="شاي"
+  data-price="500"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="شاي" />
+  <div class="card-content">
+    <h3 class="card-title">شاي</h3>
+    <div class="card-price">500 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card" 
+  data-id="drinks-5"
+  data-category="drinks"
+  data-title="لبن فخار"
+  data-price="1000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="لبن فخار" />
+  <div class="card-content">
+    <h3 class="card-title">لبن فخار</h3>
+    <div class="card-price">1,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+  <div class="card" 
+  data-id="drinks-6"
+  data-category="drinks"
+  data-title="بيبسي ماكينة"
+  data-price="1000"
+  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="بيبسي ماكينة" />
+  <div class="card-content"><h3 class="card-title">بيبسي ماكينة</h3>
+    <div class="card-price">1,000 دينار عراقي</div>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Alayash%20logo%20with%20circle.png" alt="شعار العياش" class="footer-logo" />
+
+  <div class="footer-links">
+    <a href="https://wa.me/9647750505595" target="_blank" class="footer-link" aria-label="WhatsApp">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M12 2a10 10 0 0 0-8.53 15.22L2 22l4.9-1.29A10 10 0 1 0 12 2zm0 18.2a8.16 8.16 0 0 1-4.16-1.14l-.3-.18-2.9.76.77-2.83-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.52-6.05c-.25-.13-1.47-.72-1.7-.8-.23-.08-.4-.13-.57.13-.17.25-.65.8-.8.97-.15.17-.3.19-.55.06-.25-.13-1.06-.39-2.02-1.24-.75-.66-1.25-1.48-1.4-1.73-.15-.25-.02-.39.11-.52.11-.11.25-.3.38-.45.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.57-1.38-.78-1.9-.2-.5-.41-.43-.57-.44h-.49c-.17 0-.45.06-.68.32-.23.25-.89.88-.89 2.14 0 1.25.9 2.46 1.02 2.63.13.17 1.8 2.75 4.36 3.86.6.26 1.08.42 1.45.54.6.19 1.16.16 1.6.1.5-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.3z" />
+      </svg>
+      <span class="text">9647750505595</span>
+    </a>
+
+    <a href="https://wa.me/9647850505595" target="_blank" class="footer-link" aria-label="WhatsApp">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M12 2a10 10 0 0 0-8.53 15.22L2 22l4.9-1.29A10 10 0 1 0 12 2zm0 18.2a8.16 8.16 0 0 1-4.16-1.14l-.3-.18-2.9.76.77-2.83-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.52-6.05c-.25-.13-1.47-.72-1.7-.8-.23-.08-.4-.13-.57.13-.17.25-.65.8-.8.97-.15.17-.3.19-.55.06-.25-.13-1.06-.39-2.02-1.24-.75-.66-1.25-1.48-1.4-1.73-.15-.25-.02-.39.11-.52.11-.11.25-.3.38-.45.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.57-1.38-.78-1.9-.2-.5-.41-.43-.57-.44h-.49c-.17 0-.45.06-.68.32-.23.25-.89.88-.89 2.14 0 1.25.9 2.46 1.02 2.63.13.17 1.8 2.75 4.36 3.86.6.26 1.08.42 1.45.54.6.19 1.16.16 1.6.1.5-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.1-.23-.17-.48-.3z" />
+      </svg>
+      <span class="text">9648750505595</span>
+    </a>
+
+    <a href="https://instagram.com/faroojalayash.alhila" target="_blank" class="footer-link" aria-label="Instagram">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.65 0 3 1.35 3 3v10c0 1.65-1.35 3-3 3H7c-1.65 0-3-1.35-3-3V7c0-1.65 1.35-3 3-3h10zm-5 3.2A4.8 4.8 0 0 0 7.2 12a4.8 4.8 0 0 0 4.8 4.8 4.8 4.8 0 0 0 4.8-4.8A4.8 4.8 0 0 0 12 7.2zm0 7.9A3.1 3.1 0 1 1 12 8.9a3.1 3.1 0 0 1 0 6.2zM17.3 6.3a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z"/>
+      </svg>
+      <span class="text">فروج العياش_ الحلة</span>
+    </a>
+  </div>
+</footer>
+
+<!-- Item Modal -->
+<div class="modal-overlay" id="itemModal">
+  <div class="modal">
+    <button class="modal-close" id="closeModal">✕</button>
+
+    <img id="modalImage" src="" alt="" class="modal-image" />
+
+    <div class="modal-content">
+      <h2 id="modalTitle" class="modal-title"></h2>
+      <p id="modalDesc" class="modal-desc">
+        Freshly prepared item from our grill.
+      </p>
+
+      <div class="modal-price" id="modalPrice"></div>
+
+      <div class="quantity-control">
+        <button id="qtyMinus">−</button>
+        <span id="qtyValue">1</span>
+        <button id="qtyPlus">+</button>
+      </div>
+
+      <button class="add-btn modal-add">إضافة إلى السلة</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const cards = document.querySelectorAll('.card');
+  const heroImg = document.querySelector('.category-hero img');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const category = tab.dataset.category;
+
+      // Filter cards
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Swap hero image
+      if (tab.dataset.hero) {
+        heroImg.src = tab.dataset.hero;
+        heroImg.alt = tab.dataset.alt || '';
+      }
+    });
+  });
+
+
+  const modal = document.getElementById('itemModal');
+  const modalImg = document.getElementById('modalImage');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalPrice = document.getElementById('modalPrice');
+  const qtyValue = document.getElementById('qtyValue');
+
+  const minusBtn = document.getElementById('qtyMinus');
+  const plusBtn = document.getElementById('qtyPlus');
+  const closeBtn = document.getElementById('closeModal');
+
+  let basePrice = 0;
+  let quantity = 1;
+
+  // Open modal on image click
+  document.querySelectorAll('.card img').forEach(img => {
+    img.addEventListener('click', () => {
+      const card = img.closest('.card');
+      const title = card.querySelector('.card-title').textContent;
+      const priceText = card.querySelector('.card-price').textContent;
+      const priceNumber = parseInt(priceText.replace(/[^0-9]/g, ''));
+
+      basePrice = priceNumber;
+      quantity = 1;
+
+      modalImg.src = img.src;
+      modalTitle.textContent = title;
+      modalPrice.textContent = `${basePrice.toLocaleString()} دينار عراقي`;
+      qtyValue.textContent = quantity;
+
+      modal.style.display = 'flex';
+    });
+  });
+
+  // Quantity controls
+  plusBtn.addEventListener('click', () => {
+    quantity++;
+    updatePrice();
+  });
+
+  minusBtn.addEventListener('click', () => {
+    if (quantity > 1) {
+      quantity--;
+      updatePrice();
+    }
+  });
+
+  function updatePrice() {
+    qtyValue.textContent = quantity;
+    modalPrice.textContent =
+      `${(basePrice * quantity).toLocaleString()} دينار عراقي`;
+  }
+
+  // Close modal
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  modal.addEventListener('click', e => {
+    if (e.target === modal) modal.style.display = 'none';
+  });
+
+let cart = [];
+
+// Add to cart function
+function addToCart(item) {
+  const existing = cart.find(i => i.id === item.id);
+
+  if (existing) {
+    existing.quantity++;
+  } else {
+    cart.push({ ...item, quantity: 1 });
+  }
+
+  console.log(cart); // for now
+}
+
+
+</script>
+
+</body>
+</html>
