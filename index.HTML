@@ -188,98 +188,242 @@
   color: #c13584; /* Instagram pink */
 }
 
-/* Modal overlay */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
+.card-desc {
+  font-size: 0.8rem; /* smaller text */
+  color: #555;
+  margin: 0.25rem 0 0.5rem;
 }
 
-/* Modal box */
-.modal {
+/* Location overlay */
+.location-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+}
+
+.location-overlay.active {
+  display: flex;
+}
+
+.location-box {
   background: #fff;
-  width: 92%;
+  width: 90%;
   max-width: 420px;
-  border-radius: 18px;
-  overflow: hidden;
+  border-radius: 16px;
+  padding: 1rem;
+  text-align: center;
   position: relative;
 }
 
-/* Close button */
-.modal-close {
+.location-box h3 {
+  margin: 0.5rem 0 0.75rem;
+  font-size: 1rem;
+}
+
+.location-close {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  background: #fff;
+  top: 0.6rem;
+  left: 0.6rem;
   border: none;
-  font-size: 1.2rem;
+  background: none;
+  font-size: 1.5rem;
   cursor: pointer;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
 }
 
-/* Modal image */
-.modal-image {
+.map-placeholder {
   width: 100%;
-  height: 220px;
-  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
 }
 
-/* Modal content */
-.modal-content {
+.map-placeholder iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.location-note {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Location hover / tap color */
+.footer-link[aria-label="Location"]:hover,
+.footer-link[aria-label="Location"]:active {
+  color: #c1121f; /* your red */
+}
+
+
+
+/* Cart summary box - stays at bottom, but above footer */
+.cart-summary {
+  position: fixed;
+  bottom: 0; /* keep it at bottom */
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 2px solid #f4a300;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+  font-size: 0.95rem;
+  z-index: 1000;
+}
+
+/* Make sure footer has extra bottom padding so links are visible */
+.footer {
+  padding-bottom: 5rem; /* extra space so cart summary doesn't overlap links */
+}
+
+/* Keep checkout button style exactly the same */
+.cart-summary button {
+  padding: 0.4rem 0.8rem;
+  background: #c1121f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Full-page cart overlay */
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.cart-overlay.active {
+  display: flex;
+}
+
+.cart-content {
+  background: #fff;
+  width: 90%;
+  max-width: 480px;
+  max-height: 90%;
+  border-radius: 14px;
+  overflow-y: auto;
   padding: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cart-content h2 {
+  text-align: center;
+  margin: 0;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Single cart item */
+.cart-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+
+.cart-item img {
+  width: 64px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cart-item-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.cart-item-price {
+  font-size: 0.9rem;
+  color: #c1121f;
+}
+
+/* Quantity buttons inside overlay */
+.cart-item-qty {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cart-item-qty button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  background: #c1121f;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cart-item-qty span {
+  min-width: 20px;
   text-align: center;
 }
 
-.modal-title {
-  margin: 0.5rem 0 0.25rem;
-  font-size: 1.2rem;
-}
-
-.modal-desc {
-  font-size: 0.85rem;
-  color: #555;
-  margin-bottom: 0.75rem;
-}
-
-.modal-price {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #c1121f;
-  margin-bottom: 0.75rem;
-}
-
-/* Quantity selector */
-.quantity-control {
+/* Cart footer */
+.cart-footer {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
-.quantity-control button {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+.cart-total {
+  font-weight: bold;
+  text-align: right;
+  font-size: 1rem;
+}
+
+.cart-checkout {
+  width: 100%;
+  padding: 0.75rem;
+  background: #c1121f;
+  color: #fff;
   border: none;
-  background: #eee;
-  font-size: 1.2rem;
+  border-radius: 10px;
+  font-size: 1rem;
   cursor: pointer;
 }
 
-.quantity-control span {
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-.modal-add {
-  margin-top: 0.5rem;
+.cart-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 
@@ -290,24 +434,23 @@
   <header class="top-bar">
   <div class="logo-area">
     <!-- Logo placeholder -->
-    <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Alayash%20logo%20pngg.png" alt="شعار العياش" class="logo" />
-    <button class="menu-btn">☰</button>
+    <img src="images\alayash-logo-top.png" alt="شعار العياش" class="logo" />
   </div>
 </header>
 
 <!-- Category Image -->
 <section class="category-hero">
-  <img src="hhttps://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/All%20category.png" alt="صورة القسم" />
+  <img src="images/category-placeholder.jpg" alt="صورة القسم" />
 </section>
 
   <!-- Category Tabs -->
   <nav class="tabs">
-    <div class="tab active" data-category="all" data-hero="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/All%20category.png" data-alt="الكل">الكل</div>
-    <div class="tab" data-category="grill" data-hero="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/All%20category.png" data-alt="فروج عالفحم">فروج عالفحم</div>
-    <div class="tab" data-category="sandwich" data-hero="https://via.placeholder.com/800x400?text=سندويش" data-alt="سندويش">سندويش</div>
-    <div class="tab" data-category="diet" data-hero="https://via.placeholder.com/800x400?text=دايت" data-alt="دايت">دايت</div>
-    <div class="tab" data-category="sides" data-hero="https://via.placeholder.com/800x400?text=مقبلات" data-alt="مقبلات">مقبلات</div>
-    <div class="tab" data-category="drinks" data-hero="https://via.placeholder.com/800x400?text=مشروبات" data-alt="مشروبات">مشروبات</div>
+    <div class="tab active" data-category="all" data-hero="images/category-placeholder.jpg" data-alt="الكل">الكل</div>
+    <div class="tab" data-category="grill" data-hero="images/category-placeholder.jpg" data-alt="فروج عالفحم">فروج عالفحم</div>
+    <div class="tab" data-category="sandwich" data-hero="images/category-placeholder.jpg" data-alt="سندويش">سندويش</div>
+    <div class="tab" data-category="diet" data-hero="images/category-placeholder.jpg" data-alt="دايت">دايت</div>
+    <div class="tab" data-category="sides" data-hero="images/category-placeholder.jpg" data-alt="مقبلات">مقبلات</div>
+    <div class="tab" data-category="drinks" data-hero="images/category-placeholder.jpg" data-alt="مشروبات">مشروبات</div>
   </nav>
 
   <!-- Menu Items (example placeholder card) -->
@@ -319,11 +462,17 @@
   data-category="grill"
   data-title="فروج مشوي عالفحم"
   data-price="16000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="فروج مشوي عالفحم">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="فروج مشوي عالفحم">
   <div class="card-content">
     <h3 class="card-title">فروج مشوي عالفحم</h3>
-    <div class="card-price">16,000 دينار عراقي</div>
+    <div class="card-price">16,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -333,11 +482,17 @@
   data-category="grill"
   data-title="نصف فروج مشوي عالفحم"
   data-price="9000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="نصف فروج مشوي عالفحم">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="نصف فروج مشوي عالفحم">
   <div class="card-content">
     <h3 class="card-title">نصف فروج مشوي عالفحم</h3>
-    <div class="card-price">9,000 دينار عراقي</div>
+    <div class="card-price">9,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -347,11 +502,17 @@
   data-category="grill"
   data-title="فروج مشوي عالفحم مع تمن"
   data-price="18000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="فروج مشوي عالفحم مع تمن">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="فروج مشوي عالفحم مع تمن">
   <div class="card-content">
     <h3 class="card-title">فروج مشوي عالفحم مع تمن</h3>
-    <div class="card-price">18,000 دينار عراقي</div>
+    <div class="card-price">18,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -361,15 +522,102 @@
   data-category="grill"
   data-title="نصف فروج مشوي عالفحم مع تمن"
   data-price="10000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="نصف فروج مشوي عالفحم مع تمن">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="نصف فروج مشوي عالفحم مع تمن">
   <div class="card-content">
     <h3 class="card-title">نصف فروج مشوي عالفحم مع تمن</h3>
-    <div class="card-price">10,000 دينار عراقي</div>
+    <div class="card-price">10,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
 
+<div class="card"
+  data-id="grill-5"
+  data-category="grill"
+  data-title="وجبة أجنحة"
+  data-price="8000"
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="نصف فروج مشوي عالفحم مع تمن">
+  <div class="card-content">
+    <h3 class="card-title">وجبة أجنحة</h3>
+     <p class="card-desc"> ثمانية أجنحة مع بطاطا و سرفيس</p>
+    <div class="card-price">8,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+<div class="card"
+  data-id="grill-6"
+  data-category="grill"
+  data-title="وجبة درامستيك/عصا الطبل"
+  data-price="8000"
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="نصف فروج مشوي عالفحم مع تمن">
+  <div class="card-content">
+    <h3 class="card-title">وجبة درامستيك/عصا الطبل</h3>
+     <p class="card-desc"> ستة قطع فخاد مع بطاطا و سرفيس</p>
+    <div class="card-price">8,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+<div class="card"
+  data-id="grill-7"
+  data-category="grill"
+  data-title="صحن ريزو"
+  data-price="5000"
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="نصف فروج مشوي عالفحم مع تمن">
+  <div class="card-content">
+    <h3 class="card-title">صحن ريزو</h3>
+    <div class="card-price">5,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
+
+<div class="card"
+  data-id="grill-8"
+  data-category="grill"
+  data-title="رز"
+  data-price="2000"
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="نصف فروج مشوي عالفحم مع تمن">
+  <div class="card-content">
+    <h3 class="card-title">رز</h3>
+    <div class="card-price">2,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
+    <button class="add-btn">إضافة إلى السلة</button>
+  </div>
+</div>
 
   <!-- سندويش -->
   <div class="card"
@@ -377,14 +625,18 @@
      data-category="sandwich"
      data-title="ساندويش دجاج كبير"
      data-price="6000"
-     data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png"
+     data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png"
        alt="ساندويش دجاج كبير" />
-
   <div class="card-content">
     <h3 class="card-title">ساندويش دجاج كبير</h3>
-    <div class="card-price">6,000 دينار عراقي</div>
+    <div class="card-price">6,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -395,14 +647,18 @@
      data-category="sandwich"
      data-title="ساندويش دجاج صغير"
      data-price="3500"
-     data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png"
+     data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png"
        alt="ساندويش دجاج صغير" />
-
-  <div class="card-content">
+ <div class="card-content">
     <h3 class="card-title">ساندويش دجاج صغير</h3>
-    <div class="card-price">3,500 دينار عراقي</div>
+    <div class="card-price">3,500 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -413,14 +669,19 @@
      data-category="sandwich"
      data-title="وجبة ساندويش دجاج كبير"
      data-price="8000"
-     data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png"
+     data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png"
        alt="وجبة ساندويش دجاج كبير" />
-
   <div class="card-content">
     <h3 class="card-title">وجبة ساندويش دجاج كبير</h3>
-    <div class="card-price">8,000 دينار عراقي</div>
+    <p class="card-desc"> سندويش فروج مشوي كبير مقطع مع بطاطا و سرفيس</p>
+    <div class="card-price">8,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -431,40 +692,58 @@
   data-category="diet"
   data-title="وجبة دايت"
   data-price="9000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="وجبة دايت">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="وجبة دايت">
   <div class="card-content">
     <h3 class="card-title">وجبة دايت</h3>
-    <div class="card-price">9,000 دينار عراقي</div>
+  <p class="card-desc"> صدر دجاج مع صحن سلطة</p>
+    <div class="card-price">9,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
-
 <div class="card"
   data-id="diet-2"
   data-category="diet"
   data-title="ساندويش دايت + بيبسي دايت"
   data-price="8000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="ساندويش دايت + بيبسي دايت">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="ساندويش دايت + بيبسي دايت">
   <div class="card-content">
     <h3 class="card-title">ساندويش دايت + بيبسي دايت</h3>
-    <div class="card-price">8,000 دينار عراقي</div>
+  <p class="card-desc"> سندويش سفاين بخبز أسمر</p>
+    <div class="card-price">8,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
-
   <!-- مقبلات -->
   <div class="card"
   data-id="sides-1"
   data-category="sides"
   data-title="صحن بطاطا كبير"
   data-price="4000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="صحن بطاطا كبير" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="صحن بطاطا كبير" />
   <div class="card-content">
     <h3 class="card-title">صحن بطاطا كبير</h3>
-    <div class="card-price">4,000 دينار عراقي</div>
+     <div class="card-price">4,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -474,11 +753,17 @@
   data-category="sides"
   data-title="صحن بطاطا صغير"
   data-price="2000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="صحن بطاطا صغير" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="صحن بطاطا صغير" />
   <div class="card-content">
     <h3 class="card-title">صحن بطاطا صغير</h3>
-    <div class="card-price">2,000 دينار عراقي</div>
+   <div class="card-price">2,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -487,12 +772,18 @@
   data-id="sides-3"
   data-category="sides"
   data-title="فتوش"
-  data-price="50000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="فتوش" />
+  data-price="5000"
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="فتوش" />
   <div class="card-content">
     <h3 class="card-title">فتوش</h3>
-    <div class="card-price">5,000 دينار عراقي</div>
+    <div class="card-price">5,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -502,10 +793,17 @@
   data-category="sides"
   data-title="تبولة"
   data-price="5000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="تبولة" />
-  <div class="card-content"><h3 class="card-title">تبولة</h3>
-    <div class="card-price">4,000 دينار عراقي</div>
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="تبولة" />
+  <div class="card-content">
+    <h3 class="card-title">تبولة</h3>
+    <div class="card-price">5,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -515,11 +813,17 @@
   data-category="sides"
   data-title="صحن حمص"
   data-price="4000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="صحن حمص" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="صحن حمص" />
   <div class="card-content">
     <h3 class="card-title">صحن حمص</h3>
-    <div class="card-price">4,000 دينار عراقي</div>
+     <div class="card-price">4,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -529,11 +833,17 @@
   data-category="sides"
   data-title="سلطة سيزر"
   data-price="5000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="سلطة سيزر" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="سلطة سيزر" />
   <div class="card-content">
     <h3 class="card-title">سلطة سيزر</h3>
-    <div class="card-price">5,000 دينار عراقي</div>
+   <div class="card-price">5,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -543,11 +853,17 @@
   data-category="sides"
   data-title="متبل باذنجان"
   data-price="4000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="متبل باذنجان" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="متبل باذنجان" />
   <div class="card-content">
     <h3 class="card-title">متبل باذنجان</h3>
-    <div class="card-price">4,000 دينار عراقي</div>
+     <div class="card-price">4,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -558,11 +874,17 @@
   data-category="sides"
   data-title="ورق عنب"
   data-price="5000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="ورق عنب" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="ورق عنب" />
   <div class="card-content">
     <h3 class="card-title">ورق عنب</h3>
-    <div class="card-price">5,000 دينار عراقي</div>
+     <div class="card-price">5,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -572,11 +894,17 @@
   data-category="sides"
   data-title="جاجيك"
   data-price="4000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="جاجيك" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="جاجيك" />
   <div class="card-content">
     <h3 class="card-title">جاجيك</h3>
-    <div class="card-price">4,000 دينار عراقي</div>
+     <div class="card-price">4,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -586,11 +914,17 @@
   data-category="sides"
   data-title="صحن مشكل"
   data-price="5000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="صحن مشكل" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="صحن مشكل" />
   <div class="card-content">
     <h3 class="card-title">صحن مشكل</h3>
-    <div class="card-price">5,000 دينار عراقي</div>
+     <div class="card-price">5,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -600,11 +934,17 @@
   data-category="sides"
   data-title="علبة ثوم"
   data-price="500"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="علبة ثوم" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="علبة ثوم" />
   <div class="card-content">
     <h3 class="card-title">علبة ثوم</h3>
-    <div class="card-price">500 دينار عراقي</div>
+     <div class="card-price">500 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -614,11 +954,17 @@
   data-category="sides"
   data-title="علبة حر"
   data-price="1000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="علبة حر" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="علبة حر" />
   <div class="card-content">
     <h3 class="card-title">علبة حر</h3>
-    <div class="card-price">1,000 دينار عراقي</div>
+     <div class="card-price">1,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -628,11 +974,17 @@
   data-category="sides"
   data-title="سرفيس"
   data-price="2000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="سرفيس" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="سرفيس" />
   <div class="card-content">
     <h3 class="card-title">سرفيس</h3>
-    <div class="card-price">2,000 دينار عراقي</div>
+     <div class="card-price">2,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -643,11 +995,17 @@
   data-category="drinks"
   data-title="مشروبات غازية"
   data-price="500"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="مشروبات غازية" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="مشروبات غازية" />
   <div class="card-content">
     <h3 class="card-title">مشروبات غازية</h3>
-    <div class="card-price">500 دينار عراقي</div>
+     <div class="card-price">500 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -657,11 +1015,17 @@
   data-category="drinks"
   data-title="مياه صغيرة"
   data-price="500"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="مياه صغيرة" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="مياه صغيرة" />
   <div class="card-content">
     <h3 class="card-title">مياه صغيرة</h3>
-    <div class="card-price">500 دينار عراقي</div>
+    <div class="card-price">500 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -671,11 +1035,17 @@
   data-category="drinks"
   data-title="لبن"
   data-price="500"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="لبن" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="لبن" />
   <div class="card-content">
     <h3 class="card-title">لبن</h3>
-    <div class="card-price">500 دينار عراقي</div>
+     <div class="card-price">500 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -685,11 +1055,17 @@
   data-category="drinks"
   data-title="شاي"
   data-price="500"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="شاي" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="شاي" />
   <div class="card-content">
     <h3 class="card-title">شاي</h3>
-    <div class="card-price">500 دينار عراقي</div>
+     <div class="card-price">500 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -699,11 +1075,17 @@
   data-category="drinks"
   data-title="لبن فخار"
   data-price="1000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="لبن فخار" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="لبن فخار" />
   <div class="card-content">
     <h3 class="card-title">لبن فخار</h3>
-    <div class="card-price">1,000 دينار عراقي</div>
+     <div class="card-price">1,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -713,10 +1095,16 @@
   data-category="drinks"
   data-title="بيبسي ماكينة"
   data-price="1000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="بيبسي ماكينة" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="بيبسي ماكينة" />
   <div class="card-content"><h3 class="card-title">بيبسي ماكينة</h3>
-    <div class="card-price">1,000 دينار عراقي</div>
+     <div class="card-price">1,000 د.ع</div>
+    <div class="quantity-control">
+      <button class="qty-minus">−</button>
+      <span class="qty-value">1</span>
+      <button class="qty-plus">+</button>
+    </div>
+    <p></p>
     <button class="add-btn">إضافة إلى السلة</button>
   </div>
 </div>
@@ -748,37 +1136,75 @@
       </svg>
       <span class="text">فروج العياش_ الحلة</span>
     </a>
+
+    <a
+  href="#location"
+  class="footer-link"
+  aria-label="Location"
+  id="openLocation"
+>
+  <svg
+    class="icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1 1 18 0z"/>
+    <circle cx="12" cy="10" r="3"/>
+  </svg>
+  <span class="text">العراق- الحله حي الطيارة- مقابل دار السلام</span>
+</a>
+
+
   </div>
 </footer>
 
-<!-- Item Modal -->
-<div class="modal-overlay" id="itemModal">
-  <div class="modal">
-    <button class="modal-close" id="closeModal">✕</button>
-
-    <img id="modalImage" src="" alt="" class="modal-image" />
-
-    <div class="modal-content">
-      <h2 id="modalTitle" class="modal-title"></h2>
-      <p id="modalDesc" class="modal-desc">
-        Freshly prepared item from our grill.
-      </p>
-
-      <div class="modal-price" id="modalPrice"></div>
-
-      <div class="quantity-control">
-        <button id="qtyMinus">−</button>
-        <span id="qtyValue">1</span>
-        <button id="qtyPlus">+</button>
-      </div>
-
-      <button class="add-btn modal-add">إضافة إلى السلة</button>
+<div class="cart-summary">
+  <div>
+    <span id="cartCount">0</span> المجموع الحالي: <span id="cartTotal">0</span> د.ع
+  </div>
+  <button id="checkoutBtn">تأكيد الطلب</button>
+</div>
+<div class="cart-overlay">
+  <div class="cart-content">
+    <h2>سلة التسوق</h2>
+    <div class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-total">المجموع الحالي: 0 د.ع</div>
+      <button class="cart-checkout">تخليص الطلب عبر الواتساب</button>
     </div>
+    <button class="cart-close">&times;</button>
+  </div>
+</div>
+
+<div class="location-overlay" id="locationOverlay">
+  <div class="location-box">
+    <button class="location-close">×</button>
+
+    <h3>موقع المطعم</h3>
+
+    <div class="map-placeholder">
+      <iframe
+        src="https://maps.google.com/maps?q=Baghdad&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+
+    <p class="location-note">
+      سيتم تحديث الموقع قريبًا
+    </p>
   </div>
 </div>
 
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* -------------------- TABS -------------------- */
   const tabs = document.querySelectorAll('.tab');
   const cards = document.querySelectorAll('.card');
   const heroImg = document.querySelector('.category-hero img');
@@ -789,103 +1215,228 @@
       tab.classList.add('active');
 
       const category = tab.dataset.category;
-
-      // Filter cards
       cards.forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
+        card.style.display =
+          category === 'all' || card.dataset.category === category
+            ? 'block'
+            : 'none';
       });
 
-      // Swap hero image
-      if (tab.dataset.hero) {
+      if (tab.dataset.hero && heroImg) {
         heroImg.src = tab.dataset.hero;
         heroImg.alt = tab.dataset.alt || '';
       }
     });
   });
 
+  /* 🔥 Force initial tab state (fixes All category image on load) */
+  const activeTab = document.querySelector('.tab.active') || tabs[0];
+  if (activeTab) activeTab.click();
 
-  const modal = document.getElementById('itemModal');
-  const modalImg = document.getElementById('modalImage');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalPrice = document.getElementById('modalPrice');
-  const qtyValue = document.getElementById('qtyValue');
 
-  const minusBtn = document.getElementById('qtyMinus');
-  const plusBtn = document.getElementById('qtyPlus');
-  const closeBtn = document.getElementById('closeModal');
+  /* -------------------- CART LOGIC -------------------- */
+  const cart = {};
 
-  let basePrice = 0;
-  let quantity = 1;
+  const cartCountEl = document.getElementById('cartCount');
+  const cartTotalEl = document.getElementById('cartTotal');
+  const checkoutBtn = document.getElementById('checkoutBtn');
 
-  // Open modal on image click
-  document.querySelectorAll('.card img').forEach(img => {
-    img.addEventListener('click', () => {
-      const card = img.closest('.card');
-      const title = card.querySelector('.card-title').textContent;
-      const priceText = card.querySelector('.card-price').textContent;
-      const priceNumber = parseInt(priceText.replace(/[^0-9]/g, ''));
+  /* Overlay elements */
+  const cartOverlay = document.querySelector('.cart-overlay');
+  const cartItemsContainer = document.querySelector('.cart-items');
+  const cartCloseBtn = document.querySelector('.cart-close');
+  const cartCheckoutBtn = document.querySelector('.cart-checkout');
+  const cartOverlayTotalEl = document.querySelector('.cart-total');
 
-      basePrice = priceNumber;
-      quantity = 1;
+  /* -------------------- HELPERS -------------------- */
+  function updateCartSummary() {
+    let totalItems = 0;
+    let totalPrice = 0;
 
-      modalImg.src = img.src;
-      modalTitle.textContent = title;
-      modalPrice.textContent = `${basePrice.toLocaleString()} دينار عراقي`;
+    Object.values(cart).forEach(item => {
+      totalItems += item.quantity;
+      totalPrice += item.price * item.quantity;
+    });
+
+    if (cartCountEl) cartCountEl.textContent = totalItems;
+    if (cartTotalEl) cartTotalEl.textContent = totalPrice.toLocaleString();
+  }
+
+  function updateCartOverlayTotal() {
+    const total = Object.values(cart)
+      .reduce((sum, i) => sum + i.price * i.quantity, 0);
+
+    if (cartOverlayTotalEl) {
+      cartOverlayTotalEl.textContent =
+        `المجموع الحالي: ${total.toLocaleString()} د.ع`;
+    }
+  }
+
+  function renderCartItems() {
+    if (!cartItemsContainer) return;
+
+    cartItemsContainer.innerHTML = '';
+
+    Object.values(cart).forEach(item => {
+      const itemEl = document.createElement('div');
+      itemEl.className = 'cart-item';
+
+      itemEl.innerHTML = `
+        <img src="${item.image}" alt="${item.title}">
+        <div class="cart-item-info">
+          <div class="cart-item-title">${item.title}</div>
+          <div class="cart-item-price">${item.price.toLocaleString()} د.ع</div>
+          <div class="cart-item-qty">
+            <button class="qty-minus">-</button>
+            <span class="qty-value">${item.quantity}</span>
+            <button class="qty-plus">+</button>
+          </div>
+        </div>
+      `;
+
+      const minusBtn = itemEl.querySelector('.qty-minus');
+      const plusBtn = itemEl.querySelector('.qty-plus');
+      const qtyValue = itemEl.querySelector('.qty-value');
+
+      minusBtn.addEventListener('click', () => {
+        if (item.quantity > 1) {
+          item.quantity--;
+          qtyValue.textContent = item.quantity;
+        } else {
+          delete cart[item.id];
+          itemEl.remove();
+        }
+        updateCartOverlayTotal();
+        updateCartSummary();
+      });
+
+      plusBtn.addEventListener('click', () => {
+        item.quantity++;
+        qtyValue.textContent = item.quantity;
+        updateCartOverlayTotal();
+        updateCartSummary();
+      });
+
+      cartItemsContainer.appendChild(itemEl);
+    });
+
+    updateCartOverlayTotal();
+  }
+
+  function openCartOverlay() {
+    if (!cartOverlay) return;
+    cartOverlay.classList.add('active');
+    renderCartItems();
+  }
+
+  function closeCartOverlay() {
+    if (!cartOverlay) return;
+    cartOverlay.classList.remove('active');
+  }
+
+  /* -------------------- EVENTS -------------------- */
+  if (cartCloseBtn) cartCloseBtn.addEventListener('click', closeCartOverlay);
+  if (checkoutBtn) checkoutBtn.addEventListener('click', openCartOverlay);
+
+  document.querySelectorAll('.card').forEach(card => {
+    const plusBtn = card.querySelector('.qty-plus');
+    const minusBtn = card.querySelector('.qty-minus');
+    const qtyValue = card.querySelector('.qty-value');
+    const addBtn = card.querySelector('.add-btn');
+
+    const basePrice = Number(card.dataset.price);
+    const id = card.dataset.id;
+    const title = card.dataset.title;
+    const image = card.querySelector('img')?.src || '';
+
+    let quantity = Number(qtyValue.textContent) || 1;
+
+    plusBtn.addEventListener('click', () => {
+      quantity++;
       qtyValue.textContent = quantity;
+    });
 
-      modal.style.display = 'flex';
+    minusBtn.addEventListener('click', () => {
+      if (quantity > 0) {
+        quantity--;
+        qtyValue.textContent = quantity;
+      }
+    });
+
+    addBtn.addEventListener('click', () => {
+      if (quantity === 0) {
+        delete cart[id];
+      } else {
+        cart[id] = { id, title, price: basePrice, image, quantity };
+      }
+      updateCartSummary();
     });
   });
 
-  // Quantity controls
-  plusBtn.addEventListener('click', () => {
-    quantity++;
-    updatePrice();
-  });
+  /* -------------------- WHATSAPP CHECKOUT -------------------- */
+  if (cartCheckoutBtn) {
+  cartCheckoutBtn.addEventListener('click', () => {
+    if (Object.keys(cart).length === 0) {
+      alert('سلة التسوق فارغة!');
+      return;
+    }
 
-  minusBtn.addEventListener('click', () => {
-    if (quantity > 1) {
-      quantity--;
-      updatePrice();
+    let message = 'ملخص الطلب:\n\n';
+
+    Object.values(cart).forEach(item => {
+      message += `${item.title} × ${item.quantity} = ${(item.price * item.quantity).toLocaleString()} د.ع\n`;
+    });
+
+    const total = Object.values(cart)
+      .reduce((sum, i) => sum + i.price * i.quantity, 0);
+
+    message += `\nالمجموع الحالي: ${total.toLocaleString()} د.ع\n\n`;
+    message += 'يرجى كتابة عنوانك هنا:';
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappNumber = '9647750505595';
+
+    // Open WhatsApp
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${encodedMessage}`,
+      '_blank'
+    );
+
+    /* 🔥 CLEAR CART AFTER CHECKOUT */
+    Object.keys(cart).forEach(key => delete cart[key]);
+
+    updateCartSummary();
+    renderCartItems();
+    closeCartOverlay();
+  });
+}
+  const locationBtn = document.getElementById('openLocation');
+  const locationOverlay = document.getElementById('locationOverlay');
+  const locationClose = document.querySelector('.location-close');
+
+  if (locationBtn) {
+    locationBtn.addEventListener('click', e => {
+      e.preventDefault();
+      locationOverlay.classList.add('active');
+    });
+  }
+
+  if (locationClose) {
+    locationClose.addEventListener('click', () => {
+      locationOverlay.classList.remove('active');
+    });
+  }
+
+  locationOverlay?.addEventListener('click', e => {
+    if (e.target === locationOverlay) {
+      locationOverlay.classList.remove('active');
     }
   });
 
-  function updatePrice() {
-    qtyValue.textContent = quantity;
-    modalPrice.textContent =
-      `${(basePrice * quantity).toLocaleString()} دينار عراقي`;
-  }
-
-  // Close modal
-  closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
-
-  modal.addEventListener('click', e => {
-    if (e.target === modal) modal.style.display = 'none';
-  });
-
-let cart = [];
-
-// Add to cart function
-function addToCart(item) {
-  const existing = cart.find(i => i.id === item.id);
-
-  if (existing) {
-    existing.quantity++;
-  } else {
-    cart.push({ ...item, quantity: 1 });
-  }
-
-  console.log(cart); // for now
-}
-
-
+});
 </script>
+
+
 
 </body>
 </html>
