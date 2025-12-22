@@ -117,6 +117,8 @@
     }
   
     /* Footer */
+
+    
     .footer {
       background-color: #f4a300; /* orangy yellow */
       padding: 1.5rem 1rem 2rem;
@@ -193,6 +195,73 @@
   color: #555;
   margin: 0.25rem 0 0.5rem;
 }
+
+/* Location overlay */
+.location-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+}
+
+.location-overlay.active {
+  display: flex;
+}
+
+.location-box {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  border-radius: 16px;
+  padding: 1rem;
+  text-align: center;
+  position: relative;
+}
+
+.location-box h3 {
+  margin: 0.5rem 0 0.75rem;
+  font-size: 1rem;
+}
+
+.location-close {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.map-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.map-placeholder iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.location-note {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Location hover / tap color */
+.footer-link[aria-label="Location"]:hover,
+.footer-link[aria-label="Location"]:active {
+  color: #c1121f; /* your red */
+}
+
+
 
 /* Cart summary box - stays at bottom, but above footer */
 .cart-summary {
@@ -367,24 +436,23 @@
   <header class="top-bar">
   <div class="logo-area">
     <!-- Logo placeholder -->
-    <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Alayash%20logo%20pngg.png" alt="شعار العياش" class="logo" />
-    <button class="menu-btn">☰</button>
+    <img src="images\alayash-logo-top.png" alt="شعار العياش" class="logo" />
   </div>
 </header>
 
 <!-- Category Image -->
 <section class="category-hero">
-  <img src="hhttps://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/All%20category.png" alt="صورة القسم" />
+  <img src="images/category-placeholder.jpg" alt="صورة القسم" />
 </section>
 
   <!-- Category Tabs -->
   <nav class="tabs">
-    <div class="tab active" data-category="all" data-hero="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/All%20category.png" data-alt="الكل">الكل</div>
-    <div class="tab" data-category="grill" data-hero="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/All%20category.png" data-alt="فروج عالفحم">فروج عالفحم</div>
-    <div class="tab" data-category="sandwich" data-hero="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/All%20category.png" data-alt="سندويش">سندويش</div>
-    <div class="tab" data-category="diet" data-hero="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/All%20category.png" data-alt="دايت">دايت</div>
-    <div class="tab" data-category="sides" data-hero="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/All%20category.png" data-alt="مقبلات">مقبلات</div>
-    <div class="tab" data-category="drinks" data-hero="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/All%20category.png" data-alt="مشروبات">مشروبات</div>
+    <div class="tab active" data-category="all" data-hero="images/category-placeholder.jpg" data-alt="الكل">الكل</div>
+    <div class="tab" data-category="grill" data-hero="images/category-placeholder.jpg" data-alt="فروج عالفحم">فروج عالفحم</div>
+    <div class="tab" data-category="sandwich" data-hero="images/category-placeholder.jpg" data-alt="سندويش">سندويش</div>
+    <div class="tab" data-category="diet" data-hero="images/category-placeholder.jpg" data-alt="دايت">دايت</div>
+    <div class="tab" data-category="sides" data-hero="images/category-placeholder.jpg" data-alt="مقبلات">مقبلات</div>
+    <div class="tab" data-category="drinks" data-hero="images/category-placeholder.jpg" data-alt="مشروبات">مشروبات</div>
   </nav>
 
   <!-- Menu Items (example placeholder card) -->
@@ -396,8 +464,8 @@
   data-category="grill"
   data-title="فروج مشوي عالفحم"
   data-price="16000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="فروج مشوي عالفحم">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="فروج مشوي عالفحم">
   <div class="card-content">
     <h3 class="card-title">فروج مشوي عالفحم</h3>
     <div class="card-price">16,000 د.ع</div>
@@ -416,8 +484,8 @@
   data-category="grill"
   data-title="نصف فروج مشوي عالفحم"
   data-price="9000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="نصف فروج مشوي عالفحم">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="نصف فروج مشوي عالفحم">
   <div class="card-content">
     <h3 class="card-title">نصف فروج مشوي عالفحم</h3>
     <div class="card-price">9,000 د.ع</div>
@@ -436,8 +504,8 @@
   data-category="grill"
   data-title="فروج مشوي عالفحم مع تمن"
   data-price="18000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="فروج مشوي عالفحم مع تمن">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="فروج مشوي عالفحم مع تمن">
   <div class="card-content">
     <h3 class="card-title">فروج مشوي عالفحم مع تمن</h3>
     <div class="card-price">18,000 د.ع</div>
@@ -456,8 +524,8 @@
   data-category="grill"
   data-title="نصف فروج مشوي عالفحم مع تمن"
   data-price="10000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="نصف فروج مشوي عالفحم مع تمن">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="نصف فروج مشوي عالفحم مع تمن">
   <div class="card-content">
     <h3 class="card-title">نصف فروج مشوي عالفحم مع تمن</h3>
     <div class="card-price">10,000 د.ع</div>
@@ -476,8 +544,8 @@
   data-category="grill"
   data-title="وجبة أجنحة"
   data-price="8000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="نصف فروج مشوي عالفحم مع تمن">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="نصف فروج مشوي عالفحم مع تمن">
   <div class="card-content">
     <h3 class="card-title">وجبة أجنحة</h3>
      <p class="card-desc"> ثمانية أجنحة مع بطاطا و سرفيس</p>
@@ -497,8 +565,8 @@
   data-category="grill"
   data-title="وجبة درامستيك/عصا الطبل"
   data-price="8000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="نصف فروج مشوي عالفحم مع تمن">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="نصف فروج مشوي عالفحم مع تمن">
   <div class="card-content">
     <h3 class="card-title">وجبة درامستيك/عصا الطبل</h3>
      <p class="card-desc"> ستة قطع فخاد مع بطاطا و سرفيس</p>
@@ -518,8 +586,8 @@
   data-category="grill"
   data-title="صحن ريزو"
   data-price="5000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="نصف فروج مشوي عالفحم مع تمن">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="نصف فروج مشوي عالفحم مع تمن">
   <div class="card-content">
     <h3 class="card-title">صحن ريزو</h3>
     <div class="card-price">5,000 د.ع</div>
@@ -538,8 +606,8 @@
   data-category="grill"
   data-title="رز"
   data-price="2000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="نصف فروج مشوي عالفحم مع تمن">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="نصف فروج مشوي عالفحم مع تمن">
   <div class="card-content">
     <h3 class="card-title">رز</h3>
     <div class="card-price">2,000 د.ع</div>
@@ -559,8 +627,8 @@
      data-category="sandwich"
      data-title="ساندويش دجاج كبير"
      data-price="6000"
-     data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png"
+     data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png"
        alt="ساندويش دجاج كبير" />
   <div class="card-content">
     <h3 class="card-title">ساندويش دجاج كبير</h3>
@@ -581,8 +649,8 @@
      data-category="sandwich"
      data-title="ساندويش دجاج صغير"
      data-price="3500"
-     data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png"
+     data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png"
        alt="ساندويش دجاج صغير" />
  <div class="card-content">
     <h3 class="card-title">ساندويش دجاج صغير</h3>
@@ -603,8 +671,8 @@
      data-category="sandwich"
      data-title="وجبة ساندويش دجاج كبير"
      data-price="8000"
-     data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png"
+     data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png"
        alt="وجبة ساندويش دجاج كبير" />
   <div class="card-content">
     <h3 class="card-title">وجبة ساندويش دجاج كبير</h3>
@@ -626,8 +694,8 @@
   data-category="diet"
   data-title="وجبة دايت"
   data-price="9000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="وجبة دايت">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="وجبة دايت">
   <div class="card-content">
     <h3 class="card-title">وجبة دايت</h3>
   <p class="card-desc"> صدر دجاج مع صحن سلطة</p>
@@ -646,8 +714,8 @@
   data-category="diet"
   data-title="ساندويش دايت + بيبسي دايت"
   data-price="8000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="ساندويش دايت + بيبسي دايت">
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="ساندويش دايت + بيبسي دايت">
   <div class="card-content">
     <h3 class="card-title">ساندويش دايت + بيبسي دايت</h3>
   <p class="card-desc"> سندويش سفاين بخبز أسمر</p>
@@ -667,8 +735,8 @@
   data-category="sides"
   data-title="صحن بطاطا كبير"
   data-price="4000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="صحن بطاطا كبير" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="صحن بطاطا كبير" />
   <div class="card-content">
     <h3 class="card-title">صحن بطاطا كبير</h3>
      <div class="card-price">4,000 د.ع</div>
@@ -687,8 +755,8 @@
   data-category="sides"
   data-title="صحن بطاطا صغير"
   data-price="2000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="صحن بطاطا صغير" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="صحن بطاطا صغير" />
   <div class="card-content">
     <h3 class="card-title">صحن بطاطا صغير</h3>
    <div class="card-price">2,000 د.ع</div>
@@ -707,8 +775,8 @@
   data-category="sides"
   data-title="فتوش"
   data-price="5000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="فتوش" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="فتوش" />
   <div class="card-content">
     <h3 class="card-title">فتوش</h3>
     <div class="card-price">5,000 د.ع</div>
@@ -727,8 +795,8 @@
   data-category="sides"
   data-title="تبولة"
   data-price="5000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="تبولة" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="تبولة" />
   <div class="card-content">
     <h3 class="card-title">تبولة</h3>
     <div class="card-price">5,000 د.ع</div>
@@ -747,8 +815,8 @@
   data-category="sides"
   data-title="صحن حمص"
   data-price="4000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="صحن حمص" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="صحن حمص" />
   <div class="card-content">
     <h3 class="card-title">صحن حمص</h3>
      <div class="card-price">4,000 د.ع</div>
@@ -767,8 +835,8 @@
   data-category="sides"
   data-title="سلطة سيزر"
   data-price="5000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="سلطة سيزر" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="سلطة سيزر" />
   <div class="card-content">
     <h3 class="card-title">سلطة سيزر</h3>
    <div class="card-price">5,000 د.ع</div>
@@ -787,8 +855,8 @@
   data-category="sides"
   data-title="متبل باذنجان"
   data-price="4000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="متبل باذنجان" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="متبل باذنجان" />
   <div class="card-content">
     <h3 class="card-title">متبل باذنجان</h3>
      <div class="card-price">4,000 د.ع</div>
@@ -808,8 +876,8 @@
   data-category="sides"
   data-title="ورق عنب"
   data-price="5000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="ورق عنب" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="ورق عنب" />
   <div class="card-content">
     <h3 class="card-title">ورق عنب</h3>
      <div class="card-price">5,000 د.ع</div>
@@ -828,8 +896,8 @@
   data-category="sides"
   data-title="جاجيك"
   data-price="4000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="جاجيك" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="جاجيك" />
   <div class="card-content">
     <h3 class="card-title">جاجيك</h3>
      <div class="card-price">4,000 د.ع</div>
@@ -848,8 +916,8 @@
   data-category="sides"
   data-title="صحن مشكل"
   data-price="5000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="صحن مشكل" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="صحن مشكل" />
   <div class="card-content">
     <h3 class="card-title">صحن مشكل</h3>
      <div class="card-price">5,000 د.ع</div>
@@ -868,8 +936,8 @@
   data-category="sides"
   data-title="علبة ثوم"
   data-price="500"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="علبة ثوم" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="علبة ثوم" />
   <div class="card-content">
     <h3 class="card-title">علبة ثوم</h3>
      <div class="card-price">500 د.ع</div>
@@ -888,8 +956,8 @@
   data-category="sides"
   data-title="علبة حر"
   data-price="1000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="علبة حر" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="علبة حر" />
   <div class="card-content">
     <h3 class="card-title">علبة حر</h3>
      <div class="card-price">1,000 د.ع</div>
@@ -908,8 +976,8 @@
   data-category="sides"
   data-title="سرفيس"
   data-price="2000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="سرفيس" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="سرفيس" />
   <div class="card-content">
     <h3 class="card-title">سرفيس</h3>
      <div class="card-price">2,000 د.ع</div>
@@ -929,8 +997,8 @@
   data-category="drinks"
   data-title="مشروبات غازية"
   data-price="500"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="مشروبات غازية" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="مشروبات غازية" />
   <div class="card-content">
     <h3 class="card-title">مشروبات غازية</h3>
      <div class="card-price">500 د.ع</div>
@@ -949,8 +1017,8 @@
   data-category="drinks"
   data-title="مياه صغيرة"
   data-price="500"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="مياه صغيرة" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="مياه صغيرة" />
   <div class="card-content">
     <h3 class="card-title">مياه صغيرة</h3>
     <div class="card-price">500 د.ع</div>
@@ -969,8 +1037,8 @@
   data-category="drinks"
   data-title="لبن"
   data-price="500"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="لبن" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="لبن" />
   <div class="card-content">
     <h3 class="card-title">لبن</h3>
      <div class="card-price">500 د.ع</div>
@@ -989,8 +1057,8 @@
   data-category="drinks"
   data-title="شاي"
   data-price="500"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="شاي" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="شاي" />
   <div class="card-content">
     <h3 class="card-title">شاي</h3>
      <div class="card-price">500 د.ع</div>
@@ -1009,8 +1077,8 @@
   data-category="drinks"
   data-title="لبن فخار"
   data-price="1000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="لبن فخار" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="لبن فخار" />
   <div class="card-content">
     <h3 class="card-title">لبن فخار</h3>
      <div class="card-price">1,000 د.ع</div>
@@ -1029,8 +1097,8 @@
   data-category="drinks"
   data-title="بيبسي ماكينة"
   data-price="1000"
-  data-image="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png">
-  <img src="https://file.garden/aKWI8cu4gl9vV2yp/Al%20hila/Placeholder%20Item%20image.png" alt="بيبسي ماكينة" />
+  data-image="images/item-placeholder.png">
+  <img src="images/item-placeholder.png" alt="بيبسي ماكينة" />
   <div class="card-content"><h3 class="card-title">بيبسي ماكينة</h3>
      <div class="card-price">1,000 د.ع</div>
     <div class="quantity-control">
@@ -1070,6 +1138,29 @@
       </svg>
       <span class="text">فروج العياش_ الحلة</span>
     </a>
+
+    <a
+  href="#location"
+  class="footer-link"
+  aria-label="Location"
+  id="openLocation"
+>
+  <svg
+    class="icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1 1 18 0z"/>
+    <circle cx="12" cy="10" r="3"/>
+  </svg>
+  <span class="text">العراق- الحله حي الطيارة- مقابل دار السلام</span>
+</a>
+
+
   </div>
 </footer>
 
@@ -1090,6 +1181,27 @@
     <button class="cart-close">&times;</button>
   </div>
 </div>
+
+<div class="location-overlay" id="locationOverlay">
+  <div class="location-box">
+    <button class="location-close">×</button>
+
+    <h3>موقع المطعم</h3>
+
+    <div class="map-placeholder">
+      <iframe
+        src="https://maps.google.com/maps?q=Baghdad&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+
+    <p class="location-note">
+      سيتم تحديث الموقع قريبًا
+    </p>
+  </div>
+</div>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -1265,33 +1377,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* -------------------- WHATSAPP CHECKOUT -------------------- */
   if (cartCheckoutBtn) {
-    cartCheckoutBtn.addEventListener('click', () => {
-      if (Object.keys(cart).length === 0) {
-        alert('سلة التسوق فارغة!');
-        return;
-      }
+  cartCheckoutBtn.addEventListener('click', () => {
+    if (Object.keys(cart).length === 0) {
+      alert('سلة التسوق فارغة!');
+      return;
+    }
 
-      let message = 'ملخص الطلب:\n\n';
+    let message = 'ملخص الطلب:\n\n';
 
-      Object.values(cart).forEach(item => {
-        message += `${item.title} × ${item.quantity} = ${(item.price * item.quantity).toLocaleString()} د.ع\n`;
-      });
+    Object.values(cart).forEach(item => {
+      message += `${item.title} × ${item.quantity} = ${(item.price * item.quantity).toLocaleString()} د.ع\n`;
+    });
 
-      const total = Object.values(cart)
-        .reduce((sum, i) => sum + i.price * i.quantity, 0);
+    const total = Object.values(cart)
+      .reduce((sum, i) => sum + i.price * i.quantity, 0);
 
-      message += `\nالمجموع الحالي: ${total.toLocaleString()} د.ع\n\n`;
-      message += 'يرجى كتابة عنوانك هنا:';
+    message += `\nالمجموع الحالي: ${total.toLocaleString()} د.ع\n\n`;
+    message += 'يرجى كتابة عنوانك هنا:';
 
-      const encodedMessage = encodeURIComponent(message);
-      const whatsappNumber = '9647750505595';
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappNumber = '9647750505595';
 
-      window.open(
-        `https://wa.me/${whatsappNumber}?text=${encodedMessage}`,
-        '_blank'
-      );
+    // Open WhatsApp
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${encodedMessage}`,
+      '_blank'
+    );
+
+    /* 🔥 CLEAR CART AFTER CHECKOUT */
+    Object.keys(cart).forEach(key => delete cart[key]);
+
+    updateCartSummary();
+    renderCartItems();
+    closeCartOverlay();
+  });
+}
+  const locationBtn = document.getElementById('openLocation');
+  const locationOverlay = document.getElementById('locationOverlay');
+  const locationClose = document.querySelector('.location-close');
+
+  if (locationBtn) {
+    locationBtn.addEventListener('click', e => {
+      e.preventDefault();
+      locationOverlay.classList.add('active');
     });
   }
+
+  if (locationClose) {
+    locationClose.addEventListener('click', () => {
+      locationOverlay.classList.remove('active');
+    });
+  }
+
+  locationOverlay?.addEventListener('click', e => {
+    if (e.target === locationOverlay) {
+      locationOverlay.classList.remove('active');
+    }
+  });
 
 });
 </script>
