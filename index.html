@@ -428,12 +428,14 @@
   cursor: pointer;
 }
 
-/* -------------------- DESKTOP & TABLET -------------------- */
+
+
+ /* -------------------- DESKTOP & TABLET -------------------- */
 @media (min-width: 768px) {
 
   /* Logo bigger */
   .logo {
-    height: 60px; /* was 42px */
+    height: 60px;
   }
 
   /* Tabs bigger & spaced */
@@ -446,38 +448,66 @@
     justify-content: flex-start;
   }
 
-  /* Menu grid for desktop: 3-4 columns depending on width */
+  /* Menu grid for desktop: fixed 3 columns with equal row heights */
   .menu {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
     padding: 2rem;
+    align-items: stretch; /* ensures grid items fill the row height */
   }
 
   /* Cards tweaks */
   .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* pushes button to bottom */
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    background-color: #fff;
+    overflow: hidden;
   }
 
   .card img {
-    aspect-ratio: 1/1;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
   }
 
   .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1; /* fill remaining card height */
     padding: 1rem;
   }
 
   .card-title {
     font-size: 1rem;
+    margin: 0.4rem 0 0.25rem;
+  }
+
+  .card-desc {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 0.25rem 0 0.5rem;
+    flex-shrink: 0;
   }
 
   .card-price {
     font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: #c1121f;
   }
 
   .add-btn {
     font-size: 0.95rem;
     padding: 0.65rem;
+    border-radius: 10px;
+    background-color: #c1121f;
+    color: #fff;
+    cursor: pointer;
+    flex-shrink: 0;
   }
 
   /* Footer links: horizontal on desktop */
@@ -497,7 +527,7 @@
     padding: 1.5rem;
   }
 
-  /* Full-page cart item image slightly bigger */
+  /* Cart item images slightly bigger */
   .cart-item img {
     width: 80px;
     height: 80px;
