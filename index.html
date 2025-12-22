@@ -428,6 +428,88 @@
   cursor: pointer;
 }
 
+/* -------------------- DESKTOP & TABLET -------------------- */
+@media (min-width: 768px) {
+
+  /* Logo bigger */
+  .logo {
+    height: 60px; /* was 42px */
+  }
+
+  /* Tabs bigger & spaced */
+  .tab {
+    font-size: 1.1rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .tabs {
+    justify-content: flex-start;
+  }
+
+  /* Menu grid for desktop: 3-4 columns depending on width */
+  .menu {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  /* Cards tweaks */
+  .card {
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+
+  .card img {
+    aspect-ratio: 1/1;
+  }
+
+  .card-content {
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .card-price {
+    font-size: 1rem;
+  }
+
+  .add-btn {
+    font-size: 0.95rem;
+    padding: 0.65rem;
+  }
+
+  /* Footer links: horizontal on desktop */
+  .footer-links {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .footer-link {
+    font-size: 1rem;
+  }
+
+  /* Cart overlay: wider on desktop */
+  .cart-content {
+    max-width: 600px;
+    padding: 1.5rem;
+  }
+
+  /* Full-page cart item image slightly bigger */
+  .cart-item img {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* Cart checkout button bigger text */
+  .cart-checkout {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+}
+
 
   </style>
 </head>
