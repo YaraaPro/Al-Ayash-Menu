@@ -18,10 +18,16 @@ document.addEventListener('DOMContentLoaded', () => {
             : 'none';
       });
 
-      if (tab.dataset.hero && heroImg) {
-        heroImg.src = tab.dataset.hero;
-        heroImg.alt = tab.dataset.alt || '';
-      }
+     if (tab.dataset.hero) {
+  heroImg.classList.add('fade-out');
+
+  setTimeout(() => {
+    heroImg.src = tab.dataset.hero;
+    heroImg.alt = tab.dataset.alt || '';
+    heroImg.classList.remove('fade-out');
+  }, 300);
+}
+
     });
   });
 

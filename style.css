@@ -37,7 +37,17 @@
       height: 180px;
       object-fit: cover;
       display: block;
+    
     }
+
+.category-hero img {
+  transition: opacity 0.35s ease;
+}
+
+.category-hero img.fade-out {
+  opacity: 0;
+}
+
 
     /* Category Tabs */
     .tabs {
