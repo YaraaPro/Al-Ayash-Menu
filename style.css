@@ -441,13 +441,20 @@
     justify-content: flex-start;
   }
 
-  /* Menu grid for desktop: fixed 4 columns with equal row heights */
+  /* Category hero image - proportionally taller */
+  .category-hero img {
+    height: 300px;
+    object-fit: cover; /* prevents stretching */
+    width: 100%;
+  }
+
+  /* Menu grid: 4 columns, consistent card heights */
   .menu {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
     padding: 2rem;
-    align-items: stretch; /* ensures grid items fill the row height */
+    align-items: stretch; /* ensures cards fill row height */
   }
 
   /* Cards tweaks */
@@ -463,7 +470,7 @@
 
   .card img {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1/1;
     object-fit: cover;
   }
 
@@ -471,7 +478,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex: 1; /* fill remaining card height */
+    flex: 1; /* fills remaining card height */
     padding: 1rem;
   }
 
@@ -533,3 +540,26 @@
   }
 }
 
+/* Large screens - optional extra tweaks */
+@media (min-width: 1200px) {
+  .category-hero img {
+    height: 400px;
+  }
+
+  .menu {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .card-title {
+    font-size: 1.05rem;
+  }
+
+  .card-price {
+    font-size: 1.05rem;
+  }
+
+  .add-btn {
+    font-size: 1rem;
+    padding: 0.7rem;
+  }
+}
